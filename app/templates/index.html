@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Listado de personas</h1>
+
+  <br>
+  <a href="{{ url_for('get_add_person') }}"><button type="button" class="btn btn-dark">Agregar persona</button></a>
+  <br><br>
+  <!-- crear tabla con lista de personal -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in persons %}
+      <tr>
+        <th scope="row">{{ p.id }}</th>
+        <td>{{ p.first_name }}</td>
+        <td>{{ p.last_name }}</td>
+        <td>{{ p.phone }}</td>
+        <td>
+             <a href="{{ url_for('get_edit_person', person_id=p.id) }}"><span class="badge bg-dark">Editar</span></a>
+          <a href="{{ url_for('index', delete=p.id) }}"><span class="badge bg-danger">Eliminar</span></a>
+
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
